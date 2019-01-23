@@ -50,6 +50,7 @@ Route::get('pinjam/getedit/{id}','PinjamBukuController@edit');
 Route::get('/jsonpengembalian','PinjamBukuController@jsonpengembalian');
 Route::get('/pengembalian','PinjamBukuController@index2');
 Route::post('storepengembalian','PinjamBukuController@store2')->name('tambah');
+Route::post('pinjamm/edit/{id}','PinjamBukuController@update2');
 Route::get('ajaxdata/removedatapengembalian', 'PinjamBukuController@removedata')->name('ajaxdata');
 Route::get('pinjam/pengembalian/{id}',array('as'=>'myform.ajax','uses'=>'PinjamBukuController@getedit'));
 

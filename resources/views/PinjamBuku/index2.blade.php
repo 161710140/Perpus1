@@ -23,8 +23,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h1 class="card-title">Table Jenis Buku</h1>
-              <button type="button" name="add" id="Tambah" class="btn btn-primary pull-right" style="margin-left: 960px; margin-top: 10px; margin-bottom: 10px">Add Data</button>
+              <h1 class="card-title">Pengembalian</h1>
             </div>
             <!-- /.card-header -->
             <div class="card-body">
@@ -37,6 +36,7 @@
                         <th>Tanggal Kembali</th>
                         <th>Tanggal Harus Kembali Buku</th>
                         <th>Status</th>
+                        <th>Action</th>
                      </tr>
                   </thead>
                </table>
@@ -64,6 +64,7 @@
                   { data: 'tanggal_kembali', name: 'tanggal_kembali' },
                   { data: 'tanggal_harus_kembali', name: 'tanggal_harus_kembali' },
                   { data: 'hukuman', name: 'hukuman' },
+                  { data: 'action'},
               ],
             });
           $('#Tambah').click(function(){
@@ -142,8 +143,7 @@
                //mengupdate data yang telah diedit
               $.ajax({
                 type: "POST",
-                url: "{{url ('pinjam/edit')}}"+ '/' + $('#id').val(),
-                // data: $('#student_form').serialize(),
+                url: "{{url ('pinjamm/edit')}}"+ '/' + $('#id').val(),
                 data: new FormData(this),
                 contentType: false,
                 processData: false,
@@ -199,11 +199,9 @@
                 state = "update";
 
                 $('#id').val(data.id);
-                $('#no_absen').val(data.no_absen);
-                $('#nama').val(data.nama);
-                $('#no_induk').val(data.no_induk);
-                $('#id_kelas').val(data.id_kelas);
                 $('#Modal').modal('show');
+                $('#tanggal_pinjam').val(data.tanggal_pinjam);
+                $('#tanggal_harus_kembali').val(data.tanggal_harus_kembali);
                 $('#aksi').val('Simpan');
                 $('.modal-title').text('Edit Data');
                 }

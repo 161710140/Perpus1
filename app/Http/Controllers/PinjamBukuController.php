@@ -32,29 +32,37 @@ class PinjamBukuController extends Controller
         ->addColumn('buku', function($pinjam){
             return $pinjam->Buku->judul;
         })
-
-        ->rawColumns(['action','kelas','buku','siswa'])->make(true);
+        ->rawColumns(['action','kelas','buku','siswa','action'])->make(true);
     }
 
     public function jsonpengembalian()
     {
         $PINJAM = PinjamBuku::all();
-        $pinjam = PinjamBuku::where('tanggal_kembali','!=',null);
-        return Datatables::of($pinjam)
-        ->addColumn('siswa', function($pinjam){
-            return $pinjam->Siswa->nama;
+        return Datatables::of($PINJAM)
+        ->addColumn('siswa', function($PINJAM){
+            return $PINJAM->Siswa->nama;
         })
-        ->addColumn('buku', function($pinjam){
-            return $pinjam->Buku['judul'];
+        ->addColumn('buku', function($PINJAM){
+            return $PINJAM->Buku['judul'];
         })
         ->editColumn('hukuman',function($PINJAM){
+            if ($PINJAM->tanggal_kembali == null) {
+                return '';
+            }
                 if ($PINJAM->tanggal_kembali > $PINJAM->tanggal_harus_kembali) {
                     return '<font color="red"><b>TERLAMBAT!</font></b>';
                 }else{
                     return '<font color="green"><b>Tidak Terlambat</font></b>';
                 }
+                if ($PINJAM->tanggal_kembali == $PINJAM->tanggal_harus_kembali) {
+                    return '<font color="blue"><b>Tepat Waktu</font></b>';
+                }
             })
-        ->rawColumns(['siswa','buku','hukuman'])->make(true);
+            ->addColumn('action', function($kelas){
+                return '<a href="#" class="btn btn-xs btn-primary edit" data-id="'.$kelas->id.'">
+                <i class="glyphicon glyphicon-edit"></i>Kembalikan</a>&nbsp';
+                })    
+        ->rawColumns(['siswa','buku','hukuman','action'])->make(true);
     }
 
     public function index()
@@ -122,23 +130,11 @@ class PinjamBukuController extends Controller
     public function store2(Request $request)
     {
         $this->validate($request, [
-            'id_siswa' => 'required',
-            'id_buku' => 'required',
-            'tanggal_pinjam' => 'required',
-            'tanggal_harus_kembali' => 'required',
             'tanggal_kembali' => 'required',
         ],[
-            'id_buku.required'=>':Attribute harus diisi',
-            'id_siswa.required'=>':Attribute harus diisi',
-            'id_kelas.required'=>':Attribute harus diisi',
-            'tanggal_pinjam.required'=>':Attribute harus diisi',
             'tanggal_harus_kembali.required'=>':Attribute harus diisi',
         ]);
         $data = new PinjamBuku;
-        $data->id_buku = $request->id_buku;
-        $data->id_siswa = $request->id_siswa;
-        $data->tanggal_pinjam = $request->tanggal_pinjam;
-        $data->tanggal_harus_kembali = $request->tanggal_harus_kembali;
         $data->hukuman = $request->hukuman;
         $data->tanggal_kembali = $request->tanggal_kembali;
         $data->save();
@@ -204,6 +200,18 @@ class PinjamBukuController extends Controller
         return response()->json(['success'=>true]);
     }
 
+    public function update2(Request $request,$id)
+    {
+        $this->validate($request, [
+            'tanggal_kembali' => 'required',
+        ],[
+            'tanggal_kembali.required'=>':Attribute harus diisi',
+        ]);
+        $data = PinjamBuku::findOrFail($id);
+        $data->tanggal_kembali = $request->tanggal_kembali;
+        $data->save();
+        return response()->json(['success'=>true]);
+    }
     public function KelasSiswa($id)
     {
         $id_sub = DB::table("kelas")

@@ -23,7 +23,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h1 class="card-title">Nama Kelas</h1>
+              <h1 class="card-title">Buku</h1>
               <button type="button" name="add" id="Tambah" class="btn btn-primary pull-right" style="margin-left: 960px; margin-top: 10px; margin-bottom: 10px">Add Data</button>
             </div>
             <!-- /.card-header -->
@@ -98,7 +98,6 @@
                 type: "POST",
                 url: "{{url ('/storebuku')}}",
                 data: new FormData(this),
-               // data: $('#student_form').serialize(),
                 contentType: false,
                 processData: false,
                 dataType: 'json',
@@ -143,7 +142,6 @@
               $.ajax({
                 type: "POST",
                 url: "{{url ('buku/edit')}}"+ '/' + $('#id').val(),
-                // data: $('#student_form').serialize(),
                 data: new FormData(this),
                 contentType: false,
                 processData: false,

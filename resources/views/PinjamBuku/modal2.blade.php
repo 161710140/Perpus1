@@ -20,49 +20,19 @@
                   {{csrf_field()}} {{ method_field('POST') }}
                   <span id="form_tampil"></span>
                   <input type="hidden" name="id" id="id">
-                  <div class="form-group {{ $errors->has('id_siswa') ? 'has-error' : '' }}">
-                     <label>Nama Siswa</label>
-                     <select class="form-control select-dua" name="id_siswa" id="id_siswa" style="width: 468px">
-                        <option disabled selected>Nama Siswa</option>
-                        @foreach($siswa as $data)
-                        <option value="{{$data->id}}">{{$data->nama}}</option>
-                        @endforeach
-                     </select>
-                     @if ($errors->has('id_siswa'))
-                     <span class="help-block has-error id_siswa_error">
-                        <strong>{{$errors->first('id_siswa')}}</strong>
-                     </span>
-                     @endif
-                  </div>
-                  <div class="form-group {{ $errors->has('id_buku') ? 'has-error' : '' }}">
-                     <label>Buku</label>
-                     <select class="form-control select-dua" name="id_buku" id="id_buku" style="width: 468px">
-                        <option disabled selected>Pilih Buku Yang Ingin Di Pinjam</option>
-                        @foreach($buku as $data)
-                        <option value="{{$data->id}}">{{$data->judul}}</option>
-                        @endforeach
-                     </select>
-                     @if ($errors->has('id_buku'))
-                     <span class="help-block has-error id_kelas_error">
-                        <strong>{{$errors->first('id_buku')}}</strong>
-                     </span>
-                     @endif
-                  </div>
                   <div class="form-group">
                      <label>Tanggal Pinjam Buku</label>
-                     <input type="date" name="tanggal_pinjam" id="tanggal_pinjam" class="form-control" 
-                     value="<?php echo Carbon\Carbon::now()->format('Y-m-d') ?>" readonly>
+                     <input type="date" name="tanggal_pinjam" id="tanggal_pinjam" class="form-control" readonly>
+                     <span class="help-block has-error kota_error"></span>
+                  </div>
+                  <div class="form-group">
+                     <label>Tanggal Harus Kembali Buku</label>
+                     <input type="date" name="tanggal_harus_kembali" id="tanggal_harus_kembali" class="form-control" readonly>
                      <span class="help-block has-error kota_error"></span>
                   </div>
                   <div class="form-group">
                      <label>Tanggal Kembali Buku</label>
                      <input type="date" name="tanggal_kembali" id="tanggal_kembali" class="form-control" >
-                     <span class="help-block has-error kota_error"></span>
-                  </div>
-                  <div class="form-group">
-                     <label>Tanggal Harus Kembali Buku</label>
-                     <input type="date" name="tanggal_harus_kembali" id="tanggal_harus_kembali" class="form-control"
-                     value="<?php echo Carbon\Carbon::now()->addDays(3)->format('Y-m-d') ?>" readonly>
                      <span class="help-block has-error kota_error"></span>
                   </div>
 				<div class="modal-footer">
@@ -73,28 +43,5 @@
             </div>
          </div>
       </div>
-      <script type="text/javascript">
-    $(document).ready(function(){
-      $('#id_siswa').on('change', function(){
-        var ID = $(this).val();
-          if(ID){
-            $.ajax({
-              url: 'pinjam/pengembalian/'+ID,
-              type: "GET",
-              dataType: "json",
-              success: function (data){
-                $('#id_anggota').val(data.anggota);
-                $('#tanggal_pinjam').val(data.tglpinjam);
-                $('#tglhrskbl').val(data.tglhrskbl);
-              }
-            });
-          }
-          else
-          {
-            $('#id_anggota','#id_buku','#tanggal_pinjam','#tglhrskbl').empty();
-          }
-      });
-    });
-</script>
 </body>
 </html>

@@ -23,7 +23,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h1 class="card-title">Table Jenis Buku</h1>
+              <h1 class="card-title">Peminjaman Buku</h1>
               <button type="button" name="add" id="Tambah" class="btn btn-primary pull-right" style="margin-left: 960px; margin-top: 10px; margin-bottom: 10px">Add Data</button>
             </div>
             <!-- /.card-header -->
@@ -197,14 +197,13 @@
                 state = "update";
 
                 $('#id').val(data.id);
-                $('#no_absen').val(data.no_absen);
-                $('#nama').val(data.nama);
-                $('#no_induk').val(data.no_induk);
                 $('#id_kelas').val(data.id_kelas);
                 $('#id_buku').val(data.id_buku);
                 $('#id_siswa').val(data.id_siswa);
+                $('#tanggal_pinjam').val(data.tanggal_pinjam);
+                $('#tanggal_harus_kembali').val(data.tanggal_harus_kembali);
                 $('#Modal').modal('show');
-                $('#aksi').val('Simpan');
+                $('#aksi').val('Simpan'); 
                 $('.modal-title').text('Edit Data');
                 }
               });
