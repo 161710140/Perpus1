@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('kelas.index');
+    return view('home');
 });
 Route::get('nama/{id}',array('as'=>'myform.ajax','uses'=>'PinjamBukuController@KelasSiswa'));
 //Siswa

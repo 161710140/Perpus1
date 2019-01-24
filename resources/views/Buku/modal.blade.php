@@ -46,7 +46,7 @@
                   </div>
                   <div class="form-group">
                      <label>Jumlah Buku</label>
-                     <input type="number" name="tersedia" id="tersedia" class="form-control" 
+                     <input type="number" min="0" name="tersedia" id="tersedia" class="form-control" 
                      placeholder="Jumlah Buku">
                      <span class="help-block has-error tersedia_error"></span>
                   </div>

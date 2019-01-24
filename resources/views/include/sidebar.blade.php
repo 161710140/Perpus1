@@ -1,7 +1,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="siswa" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+      <img src="logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
       <span class="brand-text font-weight-light">Peminjaman Buku</span>
     </a>
@@ -25,10 +25,11 @@
             <a href="#" class="nav-link active">
               <i class="nav-icon fa fa-dashboard"></i>
               <p>
-                DataTables
+                Menu
                 <i class="right fa fa-angle-left"></i>
               </p>
             </a>
+            @if (Auth::check())
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="kelas" class="nav-link">
@@ -62,6 +63,7 @@
               </li>
             </ul>
           </li>
+          @endif
           <!-- <li class="nav-item">
             <a href="pages/widgets.html" class="nav-link">
               <i class="nav-icon fa fa-th"></i>

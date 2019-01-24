@@ -23,17 +23,17 @@
                   <div class="form-group">
                      <label>Tanggal Pinjam Buku</label>
                      <input type="date" name="tanggal_pinjam" id="tanggal_pinjam" class="form-control" readonly>
-                     <span class="help-block has-error kota_error"></span>
+                     <span class="help-block has-error tanggal_pinjam_error"></span>
                   </div>
                   <div class="form-group">
                      <label>Tanggal Harus Kembali Buku</label>
                      <input type="date" name="tanggal_harus_kembali" id="tanggal_harus_kembali" class="form-control" readonly>
-                     <span class="help-block has-error kota_error"></span>
+                     <span class="help-block has-error tanggal_harus_kembali_error"></span>
                   </div>
                   <div class="form-group">
                      <label>Tanggal Kembali Buku</label>
                      <input type="date" name="tanggal_kembali" id="tanggal_kembali" class="form-control" >
-                     <span class="help-block has-error kota_error"></span>
+                     <span class="help-block has-error tanggal_kembali_error"></span>
                   </div>
 				<div class="modal-footer">
 					<input type="submit" name="submit" id="aksi" value="Tambah" class="btn btn-info" />

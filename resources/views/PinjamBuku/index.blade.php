@@ -51,7 +51,11 @@
 @include('PinjamBuku.modal')
       <script type="text/javascript">
          $(document).ready(function() {
-
+          $.LoadingOverlay('show',{
+          image:"{{asset('a.gif')}}",
+          text:"Mohon Tunggu....",
+          textAnimation: "1500ms fadein"
+        });
           $('#tab_pinjam').DataTable({
             processing: true,
             serverSide: true,
@@ -64,6 +68,9 @@
                   { data: 'tanggal_harus_kembali', name: 'tanggal_harus_kembali' },
               ],
             });
+            setTimeout(function(){
+          $.LoadingOverlay("hide");
+          }, 3000);
           $('#Tambah').click(function(){
 
             $('#Modal').modal('show');

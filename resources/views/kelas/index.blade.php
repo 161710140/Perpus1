@@ -48,6 +48,11 @@
 @include('kelas.modal')
       <script type="text/javascript">
          $(document).ready(function() {
+          $.LoadingOverlay('show',{
+          image:"{{asset('a.gif')}}",
+          text:"Mohon Tunggu....",
+          textAnimation: "1500ms fadein"
+        });
 
           $('#tab_kelas').DataTable({
             processing: true,
@@ -58,6 +63,9 @@
                   { data: 'action', orderable: false, searchable: false }
               ],
             });
+            setTimeout(function(){
+          $.LoadingOverlay("hide");
+          }, 3000);
           $('#Tambah').click(function(){
 
             $('#Modal').modal('show');
@@ -94,7 +102,6 @@
                 contentType: false,
                 processData: false,
                 dataType: 'json',
-
                 success: function (data){
                   console.log(data);
                   swal({

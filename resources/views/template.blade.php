@@ -58,6 +58,8 @@
 	<script src="{{asset('plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
 	<!-- FastClick -->
 	<script src="{{asset('plugins/fastclick/fastclick.js')}}"></script>
+	<!-- Loading Overlay -->
+	<script src="{{ asset('js/loadingoverlay.min.js') }}"></script>
 	<!-- AdminLTE App -->
 	<script src="{{asset('dist/js/adminlte.js')}}"></script>
 	<!-- AdminLTE for demo purposes -->

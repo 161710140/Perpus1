@@ -18,7 +18,11 @@ class PinjamBukuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
     public function jsonpinjam()
     {
         $pinjam = PinjamBuku::where('tanggal_kembali','=',null);
@@ -206,7 +210,7 @@ class PinjamBukuController extends Controller
             'tanggal_kembali' => 'required',
         ],[
             'tanggal_kembali.required'=>':Attribute harus diisi',
-        ]);
+        ]); 
         $data = PinjamBuku::findOrFail($id);
         $data->tanggal_kembali = $request->tanggal_kembali;
         $data->save();

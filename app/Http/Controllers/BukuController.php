@@ -13,6 +13,10 @@ class BukuController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function jsonbuku()
     {
@@ -56,7 +60,7 @@ class BukuController extends Controller
             'pengarang' => 'required',
             'tahun_terbit' => 'required|numeric',
             'penerbit' => 'required',
-            'tersedia' => 'required',
+            'tersedia' => 'required|not_in:0',
             
         ],[
             'judul.required'=>':Attribute harus diisi',
@@ -65,6 +69,7 @@ class BukuController extends Controller
             'tahun_terbit.numeric'=>':Attribute harus berupa angka',
             'penerbit.required'=>':Attribute harus diisi',
             'tersedia.required'=>':Attribute harus diisi',
+            'tersedia.not_in'=>'Jumlah Buku  tidak boleh 0',
         ]);
         $data = new Buku;
         $data->judul = $request->judul;

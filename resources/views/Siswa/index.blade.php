@@ -23,7 +23,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-header">
-              <h1 class="card-title">Table Jenis Buku</h1>
+              <h1 class="card-title">Nama Siswa</h1>
               <button type="button" name="add" id="Tambah" class="btn btn-primary pull-right" style="margin-left: 960px; margin-top: 10px; margin-bottom: 10px">Add Data</button>
             </div>
             <!-- /.card-header -->
@@ -51,7 +51,11 @@
 @include('Siswa.modal')
       <script type="text/javascript">
          $(document).ready(function() {
-
+          $.LoadingOverlay('show',{
+          image:"{{asset('a.gif')}}",
+          text:"Mohon Tunggu....",
+          textAnimation: "1500ms fadein"
+        });
           $('#tab_siswa').DataTable({
             processing: true,
             serverSide: true,
@@ -64,6 +68,9 @@
                   { data: 'action', orderable: false, searchable: false }
               ],
             });
+            setTimeout(function(){
+          $.LoadingOverlay("hide");
+          }, 3000);
           $('#Tambah').click(function(){
 
             $('#Modal').modal('show');
