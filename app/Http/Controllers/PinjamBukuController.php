@@ -143,9 +143,6 @@ class PinjamBukuController extends Controller
         $data->tanggal_kembali = $request->tanggal_kembali;
         $data->save();
         return response()->json(['success'=>true]);
-
-        $stok = Buku::where('id', $data->id_buku)->first();
-        $stok->tersedia = $stok->tersedia + 1;
         $stok->save();
     }
 
@@ -201,6 +198,9 @@ class PinjamBukuController extends Controller
         $data->tanggal_pinjam = $request->tanggal_pinjam;
         $data->tanggal_harus_kembali = $request->tanggal_harus_kembali;
         $data->save();
+        $stok = Buku::where('id', $data->id_buku)->first();
+        $stok->tersedia = $stok->tersedia + 1;
+        $stok->save();
         return response()->json(['success'=>true]);
     }
 

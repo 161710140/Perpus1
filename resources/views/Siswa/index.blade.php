@@ -225,7 +225,7 @@
               if (confirm("Yakin Dihapus ?")) {
 
                 $.ajax({
-                  url: "{{route('ajaxdata')}}",
+                  url: "{{route('ajaxdata.removedatasiswa')}}",
                   method: "get",
                   data:{id:bebas},
                   success: function(data){
